@@ -1,0 +1,19 @@
+# Personal / confidential — never push (kept local for writing-voice reference only)
+Internship Reports/
+
+# Unrelated to this project (kept local, not tracked)
+Proposal/EEG_Signal_Processing_Project Proposal_v2-1.pdf
+
+# macOS
+.DS_Store
+
+# Microsoft Office temp/owner-lock files
+~$*
+*.tmp
+
+# LibreOffice lock files
+.~lock.*#
+
+# Python
+__pycache__/
+*.pyc
