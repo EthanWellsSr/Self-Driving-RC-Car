@@ -9,17 +9,18 @@ A self-driving RC car that follows a controlled course and obeys traffic signs.
 
 ## Hardware
 
-- **Compute:** Raspberry Pi Compute Module 5 (CM5) on a custom carrier PCB
-- **Prototyping:** Raspberry Pi Compute Module I/O Board
-- **Sensors:**
-  - Camera (primary) — reads traffic signs
-  - Ultrasonic — distance to obstacles and walls
-  - IMU — heading and turns
+- **Compute:** Raspberry Pi Compute Module 5 (4 GB Lite) on the CM5 IO Board (custom carrier PCB planned for spring)
+- **Storage:** M.2 NVMe SSD (boots the CM5)
+- **Sensors:** camera (reads signs), ultrasonic (obstacle/wall distance), IMU (heading/turns)
+- **Display:** 16×2 I²C LCD
+
+Full parts list, prices, and wiring: [`Hardware/partslist.md`](Hardware/partslist.md) and the schematic in `Hardware/`.
 
 ## Software
 
-- Traffic-sign vision model trained in **TensorFlow**, deployed to the CM5 via **TensorFlow Lite** (trained on public traffic-sign datasets, e.g. LISA)
-- **OpenCV** for the camera / image pipeline
+- Traffic-sign **classifier** trained in **TensorFlow**, later deployed to the CM5 via **TensorFlow Lite**
+- Training data: **GTSRB** (German signs) first to prove out the pipeline, then **LISA** (US signs)
+- **OpenCV** finds/crops the sign in the frame and hands it to the classifier
 
 ## Team
 
@@ -36,6 +37,8 @@ A self-driving RC car that follows a controlled course and obeys traffic signs.
 | --- | --- |
 | `Proposal/` | Project proposal and Gantt charts |
 | `Weekly Reports/` | Weekly status reports (`.docx` + `.pdf`), the TA's template, and the report generator |
+| `Hardware/` | Parts list (`partslist.md`) and wiring schematics |
+| `Model Training/` | Traffic-sign classifier training code (GTSRB dataset is gitignored — see its README) |
 
 ### Weekly reports
 
