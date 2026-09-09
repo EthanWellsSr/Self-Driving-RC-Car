@@ -1,0 +1,9 @@
+# Dataset — download separately (see README), do not commit
+GTSRB/
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

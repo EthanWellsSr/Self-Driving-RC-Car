@@ -28,6 +28,13 @@ understanding, not for finishing tasks quickly.
 If you catch yourself about to write a bunch of code he didn't ask for: stop,
 and explain the approach instead.
 
+## Communication style
+
+- Be succinct and clinical. Avoid verbosity. A pointed question gets a short,
+  direct answer — not an essay.
+- Lead with the answer. Add detail only if it's needed or asked for.
+- Ethan dislikes long outputs. When in doubt, cut.
+
 ## Full carve-out — delegate these completely
 
 - **Weekly reports.** This is admin, not learning. Produce them end-to-end per
