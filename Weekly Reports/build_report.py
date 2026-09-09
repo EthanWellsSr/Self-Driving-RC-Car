@@ -20,7 +20,7 @@ summary = ("This week the team moved into buying hardware and starting on the so
     "Mondays 4:00 to 7:00 PM, Wednesdays 1:00 to 6:00 PM, and Thursdays 10:00 AM to 12:00 PM.")
 
 plan = [
-    ("Ethan Wells", "Get a first training run going in TensorFlow on a public traffic-sign dataset (LISA), push the training script to the GitHub repo, and start figuring out how to convert the model to TensorFlow Lite so it can run on the CM5."),
+    ("Ethan Wells", "Get the model trained in TensorFlow on the German traffic-sign dataset (GTSRB) and push the training code to the repo."),
     ("Alexis Perez", "Get the ultrasonic sensor in and test it on the bench, make sure it returns distance readings, and figure out its usable range and how it reads against a wall."),
     ("Ethan Bishop", "Get the IMU in and test it on the bench, make sure it reports heading and orientation, and check how noisy the readings are."),
     ("Abigail Duran", "Get the camera in and make sure it captures frames, and rework the schematic based on Professor Nguyen's feedback so it is ready to lay out the carrier board."),
