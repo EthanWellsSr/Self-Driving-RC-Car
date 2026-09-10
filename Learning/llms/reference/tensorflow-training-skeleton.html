@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reference — TensorFlow training skeleton</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    pre { background: var(--panel); padding: 1rem 1.1rem; border-radius: 4px; overflow-x: auto;
+          font-family: var(--mono); font-size: 0.82rem; line-height: 1.5; }
+    .step { color: var(--accent); font-weight: bold; }
+  </style>
+</head>
+<body>
+  <p class="kicker">Reference · quick lookup</p>
+  <h1>TensorFlow / Keras training skeleton</h1>
+  <p class="lead">Every training job is these five steps. Steps 3–5 barely change;
+  you swap steps 1–2 and two settings to fit a new problem.</p>
+
+  <h2>The skeleton</h2>
+  <pre>
+import tensorflow as tf
+
+# <span class="step">1. LOAD</span> — get data into a Dataset, split train/validation
+train_ds = tf.keras.utils.image_dataset_from_directory(..., subset="training",  ...)
+val_ds   = tf.keras.utils.image_dataset_from_directory(..., subset="validation", ...)
+
+# <span class="step">2. DEFINE</span> — stack layers suited to the data
+model = tf.keras.Sequential([
+    tf.keras.layers.Input(shape=(...)),
+    # ...hidden layers...
+    tf.keras.layers.Dense(N_OUTPUTS, activation=LAST_ACTIVATION),
+])
+
+# <span class="step">3. COMPILE</span> — how it learns (nearly always the same shape)
+model.compile(optimizer="adam", loss=LOSS, metrics=["accuracy"])
+
+# <span class="step">4. FIT</span> — the training loop
+model.fit(train_ds, validation_data=val_ds, epochs=N)
+
+# <span class="step">5. SAVE</span> — persist the trained model
+model.save("model.keras")
+</pre>
+
+  <h2>What you swap per problem</h2>
+  <table>
+    <tr><th>Piece</th><th>Depends on</th></tr>
+    <tr><td>Data loader (step 1)</td><td>data type — images: <code>image_dataset_from_directory</code>; tabular/CSV: <code>tf.data</code>; text: a text loader</td></tr>
+    <tr><td>Hidden layers (step 2)</td><td>problem — images: <code>Conv2D</code>; tabular: <code>Dense</code>; sequences/text: <code>LSTM</code>/attention</td></tr>
+    <tr><td>Last layer + loss</td><td>the output type — see table below (these two must agree)</td></tr>
+  </table>
+
+  <h2>Last layer &amp; loss, by task</h2>
+  <table>
+    <tr><th>Task</th><th>Last layer</th><th>Loss</th><th>Metric</th></tr>
+    <tr><td>Multi-class (N classes, integer labels)</td><td class="num">Dense(N, "softmax")</td><td class="num">sparse_categorical_crossentropy</td><td class="num">accuracy</td></tr>
+    <tr><td>Binary (yes / no)</td><td class="num">Dense(1, "sigmoid")</td><td class="num">binary_crossentropy</td><td class="num">accuracy</td></tr>
+    <tr><td>Regression (predict a number)</td><td class="num">Dense(1)</td><td class="num">mse</td><td class="num">mae</td></tr>
+  </table>
+
+  <p class="cite">Source: <a href="https://keras.io/guides/training_with_built_in_methods/">Keras — Training &amp; evaluation with the built-in methods</a>
+  · <a href="https://keras.io/api/models/model_training_apis/">Model training APIs</a></p>
+
+  <footer>
+    <p>Used by <a href="../lessons/0002-five-step-training-skeleton.html">Lesson 2</a>.</p>
+  </footer>
+</body>
+</html>

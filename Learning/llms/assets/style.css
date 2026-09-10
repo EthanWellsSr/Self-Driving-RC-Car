@@ -1,0 +1,96 @@
+/* Shared stylesheet for all LLM-learning lessons. Tufte-inspired: calm,
+   readable, prints well. Every lesson links this so the course looks unified. */
+
+:root {
+  --ink: #1a1a1a;
+  --muted: #6b6b6b;
+  --rule: #d8d3c8;
+  --bg: #fdfcf8;
+  --accent: #7a1f13;      /* deep brick red for emphasis */
+  --panel: #f4f1e8;
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --mono: "SF Mono", "Consolas", "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--serif);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.55;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+  font-size: 1.05rem;
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+}
+
+h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 0.6rem; }
+h2 { font-size: 1.3rem; margin: 2.4rem 0 0.6rem; }
+h3 { font-size: 1.05rem; margin: 1.6rem 0 0.3rem; }
+
+p, li { color: #232323; }
+strong { color: var(--ink); }
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(122,31,19,0.3); }
+a:hover { border-bottom-color: var(--accent); }
+
+.lead { font-size: 1.18rem; color: #333; }
+
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+/* callout panels */
+.panel {
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  padding: 0.9rem 1.1rem;
+  margin: 1.4rem 0;
+  border-radius: 2px;
+}
+.panel .panel-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.3rem;
+}
+
+/* comparison table */
+table { border-collapse: collapse; width: 100%; margin: 1.4rem 0; font-size: 0.97rem; }
+th, td { text-align: left; padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+td.num { font-family: var(--mono); }
+
+code { font-family: var(--mono); font-size: 0.9em; background: var(--panel); padding: 0.1em 0.35em; border-radius: 3px; }
+
+/* self-check quiz: recall practice via click-to-reveal */
+.quiz details {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+  margin: 0.7rem 0;
+  background: #fff;
+}
+.quiz summary { cursor: pointer; font-weight: bold; }
+.quiz details[open] summary { margin-bottom: 0.5rem; color: var(--accent); }
+.quiz .answer { color: #333; }
+
+.cite { font-size: 0.85rem; color: var(--muted); }
+sup a { border: 0; }
+
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9rem; color: var(--muted); }
+
+@media print {
+  body { background: #fff; max-width: 100%; padding: 0; font-size: 11pt; }
+  .panel, .quiz details { break-inside: avoid; }
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 2 — The five-step training skeleton</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    pre { background: var(--panel); padding: 0.8rem 1rem; border-radius: 4px; overflow-x: auto;
+          font-family: var(--mono); font-size: 0.82rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <p class="kicker">Training Models · Lesson 2</p>
+  <h1>The five-step training skeleton</h1>
+  <p class="lead">You already wrote this once, for GTSRB. The point of this lesson:
+  those same five steps train <em>almost any</em> model in TensorFlow. Learn the
+  skeleton and you're no longer copying a tutorial — you're adapting a pattern.</p>
+
+  <div class="panel">
+    <p class="panel-label">The whole pattern</p>
+    <strong>Load → Define → Compile → Fit → Save.</strong> Steps 3–5 stay nearly
+    identical every time. You swap steps 1–2 and two settings to fit a new problem.
+  </div>
+
+  <h2>The five steps, mapped to code you already wrote</h2>
+
+  <h3>1. Load — get data into a Dataset</h3>
+  <p>Read your data and split it into a training set and a validation set.</p>
+  <pre>train_ds = tf.keras.utils.image_dataset_from_directory("GTSRB/Train", subset="training", ...)
+val_ds   = tf.keras.utils.image_dataset_from_directory("GTSRB/Train", subset="validation", ...)</pre>
+
+  <h3>2. Define — stack the layers</h3>
+  <p>Describe the model as an ordered stack. The layer <em>types</em> suit the data
+  (images &rarr; <code>Conv2D</code>); the last layer suits the <em>output</em>.</p>
+  <pre>model = tf.keras.Sequential([
+    tf.keras.layers.Input(shape=(32, 32, 3)),
+    tf.keras.layers.Conv2D(32, 3, activation="relu"),
+    ...
+    tf.keras.layers.Dense(43, activation="softmax"),   # 43 classes out
+])</pre>
+
+  <h3>3. Compile — set how it learns</h3>
+  <p>Pick the optimizer (does the correcting), the loss (the wrongness score), and
+  metrics to watch. Passed to <code>compile()</code>.<sup><a href="https://keras.io/guides/training_with_built_in_methods/">1</a></sup></p>
+  <pre>model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])</pre>
+
+  <h3>4. Fit — run the loop</h3>
+  <p>One call runs the whole guess&rarr;check&rarr;adjust grind for N epochs, scoring
+  on the validation set each pass.</p>
+  <pre>model.fit(train_ds, validation_data=val_ds, epochs=10)</pre>
+
+  <h3>5. Save — keep the trained model</h3>
+  <pre>model.save("gtsrb_model.keras")</pre>
+
+  <h2>Why this is powerful: what actually changes</h2>
+  <p>Steps 3, 4, 5 are the same for a spam filter, a house-price predictor, or a
+  sign classifier. To move to a new problem you change just four things:</p>
+  <table>
+    <tr><th>Swap</th><th>Driven by</th></tr>
+    <tr><td>Data loader (step 1)</td><td>your data type (images / tabular / text)</td></tr>
+    <tr><td>Hidden layers (step 2)</td><td>the problem (Conv2D / Dense / LSTM)</td></tr>
+    <tr><td>Last layer</td><td>the output shape</td></tr>
+    <tr><td>Loss</td><td>the task type</td></tr>
+  </table>
+
+  <div class="panel">
+    <p class="panel-label">The one rule to remember</p>
+    The <strong>last layer and the loss must agree.</strong> Multi-class &rarr;
+    <code>Dense(N,"softmax")</code> with <code>sparse_categorical_crossentropy</code>.
+    Yes/no &rarr; <code>Dense(1,"sigmoid")</code> with <code>binary_crossentropy</code>.
+    Predict a number &rarr; <code>Dense(1)</code> with <code>mse</code>. Get those two
+    right and the skeleton carries the rest. Full table in the
+    <a href="../reference/tensorflow-training-skeleton.html">cheat sheet &rarr;</a>
+  </div>
+
+  <hr>
+
+  <div class="panel">
+    <p class="panel-label">Read this next (primary source)</p>
+    <a href="https://keras.io/guides/training_with_built_in_methods/">Keras — Training &amp; evaluation with the built-in methods</a>.
+    The canonical reference for <code>compile()</code> / <code>fit()</code>. Skim the
+    top section; it's the same skeleton in Keras's own words.
+  </div>
+
+  <h2>Self-check (recall before revealing)</h2>
+  <div class="quiz">
+    <details>
+      <summary>Name the five steps in order.</summary>
+      <p class="answer">Load, Define, Compile, Fit, Save.</p>
+    </details>
+    <details>
+      <summary>Moving to a new problem, which two steps stay basically unchanged?</summary>
+      <p class="answer">Compile and Fit — the optimizer/fit calls are the same shape.</p>
+    </details>
+    <details>
+      <summary>For predicting a house price (a number), what last layer and loss?</summary>
+      <p class="answer"><code>Dense(1)</code> with <code>mse</code> loss.</p>
+    </details>
+  </div>
+
+  <footer>
+    <p>Cheat sheet: <a href="../reference/tensorflow-training-skeleton.html">TensorFlow training skeleton</a> ·
+    Lesson 1: <a href="0001-why-llms-cant-be-trained-at-home.html">Why you can't train an LLM at home</a> ·
+    Mission: <a href="../MISSION.md">MISSION.md</a></p>
+    <p><strong>Ask your teacher:</strong> want to actually try the skeleton on a
+    different problem (a yes/no or predict-a-number model)? That's a great next lesson.</p>
+  </footer>
+
+</body>
+</html>

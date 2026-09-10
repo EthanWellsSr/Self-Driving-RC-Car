@@ -36,13 +36,28 @@ Full parts list, prices, and wiring: [`Hardware/partslist.md`](Hardware/partslis
 | Path | Contents |
 | --- | --- |
 | `Proposal/` | Project proposal and Gantt charts |
-| `Weekly Reports/` | Weekly status reports (`.docx` + `.pdf`), the TA's template, and the report generator |
+| `Weekly Reports/` | Rolling working report + presentation, the TA's template, the report generator, and a `Week N/` folder of frozen deliverables per week |
 | `Hardware/` | Parts list (`partslist.md`) and wiring schematics |
 | `Model Training/` | Traffic-sign classifier training code (GTSRB dataset is gitignored — see its README) |
 
 ### Weekly reports
 
-Reports follow the TA's required template (`Weekly Reports/project_name.docx`). The working copy is
-`Weekly Reports/Self_Driving_RC_Car.docx` / `.pdf` — rebuilt each week from `Weekly Reports/build_report.py`
-and submitted as PDF. Dated archive copies are kept as `Self_Driving_RC_Car - Week N.pdf`. See
-`Weekly Reports/context.md` for the full build/format guide.
+Reports follow the TA's required template (`Weekly Reports/project_name.docx`). Everything at the top level of
+`Weekly Reports/` is a live working copy:
+
+- `Self_Driving_RC_Car.docx` / `.pdf` — the rolling report, rebuilt each week from `build_report.py` and submitted as PDF.
+- `Self-Driving-RC-Car.pptx` — the rolling presentation deck (started Week 4), one slide per team member.
+
+Each week's frozen deliverables are archived in a `Week N/` subfolder — the dated report PDF and docx, plus the
+dated presentation from Week 4 on:
+
+```
+Weekly Reports/
+  build_report.py  context.md  project_name.docx      ← tooling + template
+  Self_Driving_RC_Car.docx / .pdf                      ← rolling report (working)
+  Self-Driving-RC-Car.pptx                             ← rolling deck (working)
+  Week 1/ … Week 3/   frozen report .pdf + .docx
+  Week 4/             frozen report + frozen .pptx
+```
+
+See `Weekly Reports/context.md` for the full build/format guide.
