@@ -41,5 +41,5 @@ model.fit(
     epochs=10,
 )
 
-
+model.save("gtsrb_model.keras")
 
