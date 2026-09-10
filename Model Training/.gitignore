@@ -2,8 +2,12 @@
 GTSRB/
 
 # Python
+.venv/
 __pycache__/
 *.pyc
+
+# IDE (PyCharm/IntelliJ)
+.idea/
 
 # macOS
 .DS_Store

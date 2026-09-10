@@ -15,7 +15,7 @@ Wiring: current [Autonomous Car Schematic.png](Autonomous%20Car%20Schematic.png)
 | Waveshare LCD1602 RGB (I²C) | 1 | Status display | Need | 17.99 | 9/9 | [amazon](https://www.amazon.com/dp/B095HBY7YP) |
 | KIOXIA BG4 128 GB M.2 2230 NVMe SSD (KBG40ZNS128G) | 1 | Boot media | Need | 44.89 | 9/9 | [amazon](https://www.amazon.com/KIOXIA-Toshiba-128GB-KBG40ZNS128G-Package/dp/B09CR818J2) |
 | UGREEN M.2 NVMe enclosure (USB) | 1 | Flash/interface the SSD from a PC | Have | 17.99 | 9/9 | [amazon](https://www.amazon.com/UGREEN-Enclosure-Tool-Free-Thunderbolt-Compatible/dp/B09T97Z7DM) |
-| Camera cable adapter (15→22-pin FPC) | 1 | Connect Camera Module 3 to CM5 IO board | TBD | — | — | |
+| RPi 5 FPC camera cable (22-pin↔15-pin, 200 mm) | 1 | Connect Camera Module 3 to CM5 IO board | Need | 2.70 | 9/9 | [adafruit 5818](https://www.adafruit.com/product/5818) |
 | RC car chassis | 1 | Vehicle frame | TBD | — | — | |
 | Drive motor(s) | 1 | Propulsion | TBD | — | — | |
 | Steering servo | 1 | Steering | TBD | — | — | |
@@ -23,7 +23,7 @@ Wiring: current [Autonomous Car Schematic.png](Autonomous%20Car%20Schematic.png)
 | Battery | 1 | Power source | TBD | — | — | |
 | Battery charger | 1 | Charge the battery | TBD | — | — | |
 | Custom carrier PCB | 1 | Final CM5 carrier board (spring) | TBD | — | — | |
-| **Running total (priced items only)** | | | | **257.97** | | |
+| **Running total (priced items only)** | | | | **260.67** | | |
 
 Pricing may vary depending on current market; prices listed were from time of purchase.
 
