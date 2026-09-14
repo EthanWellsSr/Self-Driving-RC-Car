@@ -147,8 +147,9 @@ for m in members:
     el = line_para([(m, False, False)]); anchor.addnext(el); anchor = el
 
 # Weekly Summary
-for r in p_sum_head.runs:
-    r.text = "Weekly Summary (%s):" % SUMMARY_DATE if r is p_sum_head.runs[0] else ""
+sum_runs = p_sum_head.runs   # capture once: p_sum_head.runs[0] would be a fresh object each call
+for i, r in enumerate(sum_runs):
+    r.text = "Weekly Summary (%s):" % SUMMARY_DATE if i == 0 else ""
 for r in list(sum_instr.findall(qn('w:r'))): sum_instr.remove(r)
 add_run(sum_instr, summary, False, False)
 
@@ -173,8 +174,11 @@ anchor = start
 for name, entries in contributions:
     head = line_para([(name + ":", False, True)]); anchor.addnext(head); anchor = head
     for date, text, hrs in entries:
-        unit = "hour" if hrs == 1 else "hours"
-        el = line_para([("%s – %s (%d %s)" % (date, text, hrs, unit), False, False)])
+        line = ("%s – %s" % (date, text)) if date else text   # date optional
+        if hrs is not None:                                   # hours optional (placeholder)
+            unit = "hour" if hrs == 1 else "hours"
+            line += " (%d %s)" % (hrs, unit)
+        el = line_para([(line, False, False)])
         anchor.addnext(el); anchor = el
 anchor.addnext(new_normal())   # spacer before Hour Tracker
 

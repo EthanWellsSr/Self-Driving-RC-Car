@@ -4,38 +4,38 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 PROJECT = "Self Driving RC Car"
-DATE = "9/8/2026"
-SUMMARY_DATE = "9/8/2026"
+DATE = "9/15/2026"
+SUMMARY_DATE = "9/15/2026"
 
 members = ["Ethan Wells (Group Leader)", "Alexis Perez", "Ethan Bishop", "Abigail Duran"]
 
-summary = ("This week the team moved into buying hardware and starting on the software side. "
-    "We bought the Raspberry Pi Compute Module I/O Board, which came in this week, so we have a board to prototype the CM5 carrier design on. "
-    "Abigail drew up the schematic Professor Nguyen asked for. "
-    "We also ordered the rest of the core sensors: an ultrasonic sensor for measuring distance to obstacles and walls, "
-    "an IMU for tracking heading and turns, and the camera that reads the traffic signs. "
-    "Ethan Wells started researching how to train the traffic-sign model in TensorFlow, which is the framework the proposal calls for, "
-    "and set up a GitHub repository to hold the training code. "
-    "As a group we settled on standing weekly meeting times in the Robotics Lab in the Delta Building: "
-    "Mondays 4:00 to 7:00 PM, Wednesdays 1:00 to 6:00 PM, and Thursdays 10:00 AM to 12:00 PM.")
+# NOTE (Week 4 draft): only Ethan Wells' data is filled in. The other three members
+# are placeholders pending their updates — replace the "[Pending ...]" text and the
+# "TBD" hours below before submitting.
+summary = ("This week Ethan Wells completed the traffic-sign model milestone from last week's plan: "
+    "he trained a convolutional neural network on the GTSRB German traffic-sign dataset to about 95% validation accuracy, "
+    "and committed both the trained model and the training script to the project repository, "
+    "working in a Python 3.12 environment (the version TensorFlow currently supports). "
+    "Updates from the rest of the team on the ultrasonic sensor, IMU, and camera/schematic work are pending "
+    "and will be added before submission.")
 
 plan = [
-    ("Ethan Wells", "Get the model trained in TensorFlow on the German traffic-sign dataset (GTSRB) and push the training code to the repo."),
-    ("Alexis Perez", "Get the ultrasonic sensor in and test it on the bench, make sure it returns distance readings, and figure out its usable range and how it reads against a wall."),
-    ("Ethan Bishop", "Get the IMU in and test it on the bench, make sure it reports heading and orientation, and check how noisy the readings are."),
-    ("Abigail Duran", "Get the camera in and make sure it captures frames, and rework the schematic based on Professor Nguyen's feedback so it is ready to lay out the carrier board."),
+    ("Ethan Wells", "Prepare the LISA dataset (US traffic signs) for training."),
+    ("Alexis Perez", "[Pending — to be provided]"),
+    ("Ethan Bishop", "[Pending — to be provided]"),
+    ("Abigail Duran", "[Pending — to be provided]"),
 ]
 
 contributions = [
-    ("Ethan Wells", [("9/8/2026", "Bought the Compute Module I/O Board (it came in this week), started researching how to train the traffic-sign model in TensorFlow, and set up a GitHub repository for the training code", 5)]),
-    ("Alexis Perez", [("9/7/2026", "Researched ultrasonic sensor options and ordered one to measure distance to obstacles and walls", 3)]),
-    ("Ethan Bishop", [("9/7/2026", "Researched IMU options and ordered one to track heading and turns", 3)]),
-    ("Abigail Duran", [("9/7/2026", "Worked on the schematic Professor Nguyen asked for", 2),
-                        ("9/8/2026", "Finished the schematic and ordered the camera", 3)]),
+    ("Ethan Wells", [("9/10/2026", "Built and ran the first CNN training on the GTSRB German traffic-sign dataset in TensorFlow", 3),
+                        ("9/14/2026", "Tuned the model to ~95% validation accuracy and committed the trained model (gtsrb_model.keras) and training script to the repo", 4)]),
+    ("Alexis Perez", [("", "[Pending — awaiting progress and hours]", None)]),
+    ("Ethan Bishop", [("", "[Pending — awaiting progress and hours]", None)]),
+    ("Abigail Duran", [("", "[Pending — awaiting progress and hours]", None)]),
 ]
 
-hours = [("Ethan Wells", "5", "5"), ("Alexis Perez", "3", "3"),
-         ("Ethan Bishop", "3", "3"), ("Abigail Duran", "5", "5")]
+hours = [("Ethan Wells", "7", "12"), ("Alexis Perez", "TBD", "TBD"),
+         ("Ethan Bishop", "TBD", "TBD"), ("Abigail Duran", "TBD", "TBD")]
 
 d = Document("project_name.docx")
 
@@ -100,8 +100,9 @@ for m in members:
     anchor.addnext(el); anchor = el
 
 # 4) Weekly Summary heading date + body
-for r in p_sum_head.runs:
-    r.text = "Weekly Summary (%s):" % SUMMARY_DATE if r is p_sum_head.runs[0] else ""
+sum_runs = p_sum_head.runs   # capture once: p_sum_head.runs[0] would be a fresh object each call
+for i, r in enumerate(sum_runs):
+    r.text = "Weekly Summary (%s):" % SUMMARY_DATE if i == 0 else ""
 # replace instruction paragraph content with the summary
 for r in list(sum_instr.findall(qn('w:r'))): sum_instr.remove(r)
 add_run(sum_instr, summary, False, False)
@@ -138,8 +139,11 @@ for name, entries in contributions:
     head = line_para([(name + ":", False, True)])
     anchor.addnext(head); anchor = head
     for date, text, hrs in entries:
-        unit = "hour" if hrs == 1 else "hours"
-        el = line_para([("%s – %s (%d %s)" % (date, text, hrs, unit), False, False)])
+        line = ("%s – %s" % (date, text)) if date else text   # date optional
+        if hrs is not None:                                   # hours optional (placeholder)
+            unit = "hour" if hrs == 1 else "hours"
+            line += " (%d %s)" % (hrs, unit)
+        el = line_para([(line, False, False)])
         anchor.addnext(el); anchor = el
 # one blank spacer before Hour Tracker
 spacer = new_normal()
