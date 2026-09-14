@@ -9,33 +9,37 @@ SUMMARY_DATE = "9/15/2026"
 
 members = ["Ethan Wells (Group Leader)", "Alexis Perez", "Ethan Bishop", "Abigail Duran"]
 
-# NOTE (Week 4 draft): only Ethan Wells' data is filled in. The other three members
-# are placeholders pending their updates — replace the "[Pending ...]" text and the
-# "TBD" hours below before submitting.
-summary = ("This week Ethan Wells completed the traffic-sign model milestone from last week's plan: "
-    "he trained a convolutional neural network on the GTSRB German traffic-sign dataset to about 95% validation accuracy, "
-    "and committed both the trained model and the training script to the project repository, "
-    "working in a Python 3.12 environment (the version TensorFlow currently supports). "
-    "Updates from the rest of the team on the ultrasonic sensor, IMU, and camera/schematic work are pending "
-    "and will be added before submission.")
+summary = ("This week the team made progress on all fronts. "
+    "Ethan Wells trained the traffic-sign model — a convolutional neural network on the GTSRB German dataset reaching about 95% validation accuracy — "
+    "committed the model and training code, and ordered the CR2032 RTC battery and the KIOXIA NVMe boot SSD with a USB enclosure. "
+    "Alexis Perez bench-tested the ultrasonic sensor's distance readings and accuracy and researched drive-motor options. "
+    "Ethan Bishop tested the IMU for measurement accuracy, researched motor-controller options, and started drying filament to prepare the home 3D printer for chassis-component testing. "
+    "Abigail Duran completed and refined the first-semester schematic around the Raspberry Pi Compute Module 5, resolved ERC issues to ready it for PCB development, "
+    "and began hardware prototyping for the stationary test setup.")
 
 plan = [
-    ("Ethan Wells", "Prepare the LISA dataset (US traffic signs) for training."),
-    ("Alexis Perez", "[Pending — to be provided]"),
-    ("Ethan Bishop", "[Pending — to be provided]"),
-    ("Abigail Duran", "[Pending — to be provided]"),
+    ("Ethan Wells", "Prepare the LISA dataset (US traffic signs) for training; test the trained German-sign (GTSRB) model."),
+    ("Alexis Perez", "Select and order motors; write code to integrate the ultrasonic sensor on the Raspberry Pi."),
+    ("Ethan Bishop", "Select and order a motor controller; write code to integrate the IMU on the Raspberry Pi."),
+    ("Abigail Duran", "Begin the PCB design and layout from the completed schematic; place major components and determine board dimensions; begin planning power and signal routing."),
 ]
 
 contributions = [
     ("Ethan Wells", [("9/10/2026", "Built and ran the first CNN training on the GTSRB German traffic-sign dataset in TensorFlow", 3),
                         ("9/14/2026", "Tuned the model to ~95% validation accuracy and committed the trained model (gtsrb_model.keras) and training script to the repo", 4)]),
-    ("Alexis Perez", [("", "[Pending — awaiting progress and hours]", None)]),
-    ("Ethan Bishop", [("", "[Pending — awaiting progress and hours]", None)]),
-    ("Abigail Duran", [("", "[Pending — awaiting progress and hours]", None)]),
+    ("Alexis Perez", [("", "Tested the ultrasonic sensor's distance readings and measurement accuracy", None),
+                        ("", "Researched drive-motor options for the vehicle", None)]),
+    ("Ethan Bishop", [("", "Tested the IMU for measurement accuracy", None),
+                        ("", "Researched motor-controller options", None),
+                        ("", "Started drying filament to prep the home 3D printer for chassis-component testing", None)]),
+    ("Abigail Duran", [("", "Completed the first-semester schematic for stationary testing of the autonomous car system", None),
+                        ("", "Built and refined the schematic around the Raspberry Pi Compute Module 5", None),
+                        ("", "Resolved schematic/ERC issues and prepared the design for PCB development", None),
+                        ("", "Began hardware prototyping for the stationary test setup", None)]),
 ]
 
-hours = [("Ethan Wells", "7", "12"), ("Alexis Perez", "TBD", "TBD"),
-         ("Ethan Bishop", "TBD", "TBD"), ("Abigail Duran", "TBD", "TBD")]
+hours = [("Ethan Wells", "7", "12"), ("Alexis Perez", "6", "9"),
+         ("Ethan Bishop", "6", "9"), ("Abigail Duran", "6", "11")]
 
 d = Document("project_name.docx")
 
