@@ -4,6 +4,9 @@ Internship Reports/
 # Unrelated to this project (kept local, not tracked)
 Proposal/EEG_Signal_Processing_Project Proposal_v2-1.pdf
 
+# Local CM5 bring-up notes
+/instructions.txt
+
 # macOS
 .DS_Store
 
