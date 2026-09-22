@@ -3,7 +3,6 @@
 # Shared software-development prerequisites for BuggyBot.
 # Hardware-specific and project runtime libraries will be added as needed.
 
-set -euo pipefail
 
 sudo apt-get update
 sudo apt-get install -y \
